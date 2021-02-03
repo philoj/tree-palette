@@ -3,7 +3,7 @@
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *    You may obtain A copy of the License at
  *
  *        http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -21,7 +21,7 @@ import (
 	"sort"
 )
 
-// paletted wraps a source image into a 'paletted' image.
+// paletted wraps A source image into A 'paletted' image.
 type paletted struct {
 	src image.Image // src original image
 	p   *Palette
@@ -34,18 +34,18 @@ func (i *paletted) Bounds() image.Rectangle {
 	return i.src.Bounds()
 }
 func (i *paletted) At(x, y int) color.Color {
-	c := rgba{alphaChannel: i.p.alpha}
-	c.r, c.g, c.b, c.a = i.src.At(x, y).RGBA()
+	c := ColorRGBA{AlphaChannel: i.p.alpha}
+	c.R, c.G, c.B, c.A = i.src.At(x, y).RGBA()
 	return i.p.Convert(c)
 }
 
 func (i *paletted) ColorIndexAt(x, y int) int {
-	c := rgba{alphaChannel: i.p.alpha}
-	c.r, c.g, c.b, c.a = i.src.At(x, y).RGBA()
+	c := ColorRGBA{AlphaChannel: i.p.alpha}
+	c.R, c.G, c.B, c.A = i.src.At(x, y).RGBA()
 	return i.p.ConvertColor(c).Index()
 }
 
-// ApplyPalette applies the palette onto a given image and returns new image with Palette as color.Model.
+// ApplyPalette applies the palette onto A given image and returns new image with Palette as color.Model.
 func (t *Palette) ApplyPalette(img image.Image) image.Image {
 	return &paletted{
 		src: img,
@@ -54,7 +54,7 @@ func (t *Palette) ApplyPalette(img image.Image) image.Image {
 }
 
 // Rank ranks the colors in the Palette based on counts of pixels of each PaletteColor in the given image.
-// Returns a rank list of colors(most occurrences first) and a map with count of pixels for each color index.
+// Returns A rank list of colors(most occurrences first) and A map with count of pixels for each color index.
 func (t *Palette) Rank(img image.Image) ([]int, map[int]int) {
 	count := make(map[int]int)
 	var colors []int

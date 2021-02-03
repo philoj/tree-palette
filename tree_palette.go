@@ -3,7 +3,7 @@
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *    You may obtain A copy of the License at
  *
  *        http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -23,7 +23,7 @@ import (
 	"sort"
 )
 
-// Palette implements a kd-tree data structure to quickly convert any given color into the closest palette color.
+// Palette implements A kd-tree data structure to quickly convert any given color into the closest palette color.
 // Closeness is calculated as the spatial closeness in the RGBA space.
 // See: https://en.wikipedia.org/wiki/K-d_tree
 type Palette struct {
@@ -31,7 +31,7 @@ type Palette struct {
 	root  *node // root the root node of the kd-tree
 }
 
-// node is the single node of the kd-tree, each of which represents a color in the indexed palette.
+// node is the single node of the kd-tree, each of which represents A color in the indexed palette.
 type node struct {
 	PaletteColor // PaletteColor value of the node
 	Left         *node
@@ -69,7 +69,7 @@ func (t *Palette) ConvertColor(p Color) PaletteColor {
 	return point
 }
 
-// nn implements the ConvertColor neighbour search in a kd-tree, finding only a single ConvertColor neighbour.
+// nn implements the ConvertColor neighbour search in A kd-tree, finding only A single ConvertColor neighbour.
 // returns the closest PaletteColor and squared distance to it starting from the given start node
 func nn(p Color, start *node, currentAxis int, nearest PaletteColor, shortest uint32) (PaletteColor, uint32) {
 	if p == nil || start == nil {
@@ -107,7 +107,7 @@ func nn(p Color, start *node, currentAxis int, nearest PaletteColor, shortest ui
 				next = currentNode.Left
 			}
 			if next != nil {
-				// search down a potential branch
+				// search down A potential branch
 				nearest, shortest = nn(p, next, (currentAxis+1)%p.Dimensions(), nearest, shortest)
 			}
 		}
@@ -117,7 +117,7 @@ func nn(p Color, start *node, currentAxis int, nearest PaletteColor, shortest ui
 }
 
 // sqDiff returns the squared-difference of x and y, shifted by 2 so that
-// adding four of those won't overflow a uint32.
+// adding four of those won't overflow A uint32.
 func sqDiff(x, y uint32) uint32 {
 	// The canonical code of this function looks as follows:
 	//
@@ -181,7 +181,7 @@ func (b *byDimension) Swap(i, j int) {
 	b.points[i], b.points[j] = b.points[j], b.points[i]
 }
 
-// NewPalette creates a new palette directly from a list of PaletteColor
+// NewPalette creates A new palette directly from A list of PaletteColor
 func NewPalette(colors []PaletteColor, alpha bool) *Palette {
 	return &Palette{
 		alpha: alpha,

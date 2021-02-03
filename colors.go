@@ -3,7 +3,7 @@
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
+ *    You may obtain A copy of the License at
  *
  *        http://www.apache.org/licenses/LICENSE-2.0
  *
@@ -19,18 +19,18 @@ import (
 	"fmt"
 )
 
-// color.Color express a color as a n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
+// color.Color express A color as A n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
 // This supports both RGBA and RGB(no alpha) spaces since latter would reduce computing for cases where transparency is not important.
 type Color interface {
 
 	// Dimensions returns the total number of dimensions(3 for RGB, 4 for RGBA).
 	Dimensions() int
 
-	// Dimension returns the value of the i-th dimension, say r,g,b and/or a.
+	// Dimension returns the value of the i-th dimension, say R,G,B and/or A.
 	Dimension(i int) uint32
 }
 
-// PaletteColor is a Color inside an indexed color palette.
+// PaletteColor is A Color inside an indexed color palette.
 type PaletteColor interface {
 	Color
 
@@ -38,40 +38,39 @@ type PaletteColor interface {
 	Index() int
 }
 
-
-// rgba Example Color implementation.
-type rgba struct {
-	r, g, b, a   uint32 // r,g,b, and a are considered as dimensions 0,1,2 and 3 respectively.
-	alphaChannel bool   // If false, alpha values are ignored.
+// ColorRGBA Example Color implementation.
+type ColorRGBA struct {
+	R, G, B, A   uint32 // R,G,B, and A are considered as dimensions 0,1,2 and 3 respectively.
+	AlphaChannel bool   // If false, alpha values are ignored.
 }
 
 // color.Color implementation
-func (c rgba) RGBA() (uint32, uint32, uint32, uint32) {
-	if c.alphaChannel {
-		return c.r, c.g, c.b, c.a
+func (c ColorRGBA) RGBA() (uint32, uint32, uint32, uint32) {
+	if c.AlphaChannel {
+		return c.R, c.G, c.B, c.A
 	}
-	return c.r, c.g, c.b, 0xffff
+	return c.R, c.G, c.B, 0xffff
 }
 
-func (c rgba) Dimensions() int {
-	if c.alphaChannel {
+func (c ColorRGBA) Dimensions() int {
+	if c.AlphaChannel {
 		return 4
 	} else {
 		return 3
 	}
 }
 
-func (c rgba) Dimension(i int) uint32 {
+func (c ColorRGBA) Dimension(i int) uint32 {
 	switch i {
 	case 0:
-		return c.r
+		return c.R
 	case 1:
-		return c.g
+		return c.G
 	case 2:
-		return c.b
+		return c.B
 	case 3:
-		if c.alphaChannel {
-			return c.a
+		if c.AlphaChannel {
+			return c.A
 		}
 		fallthrough
 	default:
@@ -79,12 +78,12 @@ func (c rgba) Dimension(i int) uint32 {
 	}
 }
 
-// indexedColor Example PaletteColor implementation.
-type indexedColor struct {
-	rgba
-	id int // id is the color's unique index
+// IndexedColorRGBA Example PaletteColor implementation.
+type IndexedColorRGBA struct {
+	ColorRGBA
+	Id int // Id is the color's unique index
 }
 
-func (ic indexedColor) Index() int {
-	return ic.id
+func (ic IndexedColorRGBA) Index() int {
+	return ic.Id
 }
