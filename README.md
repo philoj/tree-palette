@@ -8,6 +8,7 @@ An indexed color palette implementation in Go on top of a [k-d tree](https://en.
 - Direct image conversion
 - Image pixel counting and color ranking, for prominent color analysis
 
+kd-tree implementation adapted from: [kyroy/kdtree](https://github.com/kyroy/kdtree)
 
 ## Usage
 
