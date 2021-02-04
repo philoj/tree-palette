@@ -1,3 +1,3 @@
-module github.com/philoj/tree_palette
+module github.com/philoj/tree-palette
 
 go 1.15
