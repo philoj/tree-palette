@@ -86,6 +86,24 @@ func (c ColorRGBA) String() string {
 	}
 }
 
+func NewTransparentColor(R, G, B, A uint32) ColorRGBA {
+	return ColorRGBA{
+		R:            R,
+		G:            G,
+		B:            B,
+		A:            A,
+		AlphaChannel: true,
+	}
+}
+func NewOpaqueColor(R, G, B uint32) ColorRGBA {
+	return ColorRGBA{
+		R:            R,
+		G:            G,
+		B:            B,
+		AlphaChannel: false,
+	}
+}
+
 // IndexedColorRGBA Example PaletteColor implementation.
 type IndexedColorRGBA struct {
 	ColorRGBA
@@ -98,4 +116,17 @@ func (ic IndexedColorRGBA) Index() int {
 
 func (ic IndexedColorRGBA) String() string {
 	return fmt.Sprintf("{Id: %d, ColorRGBA: %s}", ic.Id, ic.ColorRGBA)
+}
+
+func NewTransparentPaletteColor(R, G, B, A uint32, id int) IndexedColorRGBA {
+	return IndexedColorRGBA{
+		Id:        id,
+		ColorRGBA: NewTransparentColor(R, G, B, A),
+	}
+}
+func ewOpaquePaletteColor(R, G, B uint32, id int) IndexedColorRGBA {
+	return IndexedColorRGBA{
+		Id:        id,
+		ColorRGBA: NewOpaqueColor(R, G, B),
+	}
 }
