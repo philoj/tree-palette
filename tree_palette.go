@@ -27,8 +27,9 @@ import (
 // Closeness is calculated as the spatial closeness in the RGBA space.
 // See: https://en.wikipedia.org/wiki/K-d_tree
 type Palette struct {
-	alpha bool  // alpha if false, ignore alpha values
-	root  *node // root the root node of the kd-tree
+	alpha  bool                 // alpha if false, ignore alpha values
+	root   *node                // root the root node of the kd-tree
+	lookup map[int]PaletteColor // Lookup table
 }
 
 // node is the single node of the kd-tree, each of which represents A color in the indexed palette.
@@ -180,8 +181,13 @@ func (b *byDimension) Swap(i, j int) {
 
 // NewPalette creates A new palette directly from A list of PaletteColor
 func NewPalette(colors []PaletteColor, alpha bool) *Palette {
+	t := make(map[int]PaletteColor)
+	for _, c := range colors {
+		t[c.Index()] = c
+	}
 	return &Palette{
-		alpha: alpha,
-		root:  newColorTree(colors, 0),
+		alpha:  alpha,
+		root:   newColorTree(colors, 0),
+		lookup: t,
 	}
 }

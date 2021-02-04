@@ -55,7 +55,33 @@ func (t *Palette) ApplyPalette(img image.Image) image.Image {
 
 // Rank ranks the colors in the Palette based on counts of pixels of each PaletteColor in the given image.
 // Returns A rank list of colors(most occurrences first) and A map with count of pixels for each color index.
-func (t *Palette) Rank(img image.Image) ([]int, map[int]int) {
+func (t *Palette) Rank(img image.Image) ([]PaletteColor, map[int]int) {
+	count := make(map[int]int)
+	var colors []PaletteColor
+	pImg := &paletted{
+		src: img,
+		p:   t,
+	}
+	b := img.Bounds()
+	for y := 0; y < b.Dy(); y++ {
+		for x := 0; x < b.Dx(); x++ {
+			index := pImg.ColorIndexAt(x, y)
+			_, ok := count[index]
+			if !ok {
+				colors = append(colors, t.lookup[index])
+			}
+			count[index]++
+		}
+	}
+	sort.Slice(colors, func(i, j int) bool {
+		return count[colors[i].Index()] > count[colors[j].Index()]
+	})
+	return colors, count
+}
+
+// RankByIndex ranks the colors in the Palette based on counts of pixels of each PaletteColor in the given image.
+// Returns A rank list of color indexes(most occurrences first) and A map with count of pixels for each color index.
+func (t *Palette) RankByIndex(img image.Image) ([]int, map[int]int) {
 	count := make(map[int]int)
 	var colors []int
 	pImg := &paletted{

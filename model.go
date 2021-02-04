@@ -17,7 +17,6 @@ package treePalette
 
 import "image/color"
 
-
 //
 // color.Model implementation for Palette.
 //
@@ -54,8 +53,5 @@ func NewPalettedColorModel(colors []color.Color, alpha bool) color.Model {
 				AlphaChannel: alpha},
 		})
 	}
-	return &Palette{
-		alpha: alpha,
-		root:  newColorTree(nodes, 0),
-	}
+	return NewPalette(nodes, alpha)
 }
