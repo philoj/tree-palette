@@ -19,7 +19,7 @@ import (
 	"fmt"
 )
 
-// color.Color express A color as A n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
+// Color express A color as A n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
 // This supports both RGBA and RGB(no alpha) spaces since latter would reduce computing for cases where transparency is not important.
 type Color interface {
 

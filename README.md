@@ -34,7 +34,7 @@ equivalentColor := m.Convert(someColor)
 Start by implementing `treePalette.PaletteColor` and `treePalette.Color` interfaces:
 
 ```go
-// color.Color express A color as A n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
+// Color express A color as A n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
 type Color interface {
 
 	// Dimensions returns the total number of dimensions(3 for RGB, 4 for RGBA).
