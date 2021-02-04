@@ -78,6 +78,14 @@ func (c ColorRGBA) Dimension(i int) uint32 {
 	}
 }
 
+func (c ColorRGBA) String() string {
+	if c.AlphaChannel {
+		return fmt.Sprintf("{R:%d, G:%d, B:%d, A:%d}", c.R, c.G, c.B, c.A)
+	} else {
+		return fmt.Sprintf("{R:%d, G:%d, B:%d}", c.R, c.G, c.B)
+	}
+}
+
 // IndexedColorRGBA Example PaletteColor implementation.
 type IndexedColorRGBA struct {
 	ColorRGBA
@@ -86,4 +94,8 @@ type IndexedColorRGBA struct {
 
 func (ic IndexedColorRGBA) Index() int {
 	return ic.Id
+}
+
+func (ic IndexedColorRGBA) String() string {
+	return fmt.Sprintf("{Id: %d, ColorRGBA: %s}", ic.Id, ic.ColorRGBA)
 }
