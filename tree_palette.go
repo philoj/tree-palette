@@ -60,12 +60,9 @@ func newColorTree(points []PaletteColor, axis int) *node {
 // ConvertColor finds the ConvertColor PaletteColor from the Palette
 func (t *Palette) ConvertColor(p Color) PaletteColor {
 	if t.root == nil || p == nil {
-		panic(fmt.Errorf("nil value for either root or p"))
+		return nil
 	}
 	point, _ := nn(p, t.root, 0, nil, math.MaxUint32)
-	if point == nil {
-		panic("failed to find ConvertColor")
-	}
 	return point
 }
 
