@@ -38,16 +38,13 @@ func TestTreePalette_ConvertColor(t *testing.T) {
 			color: nil,
 			alpha: true,
 			palette: []treePalette.PaletteColor{
-				&treePalette.IndexedColorRGBA{
-					ColorRGBA: treePalette.ColorRGBA{R: 1, G: 2, B: 3, A: 4, AlphaChannel: true},
-					Id:        1,
-				},
+				treePalette.NewOpaquePaletteColor(199, 44, 58, 7, "BRICK RED"),
 			},
 			output: nil,
 		},
 		{
 			name:    "empty palette",
-			color:   &treePalette.ColorRGBA{R: 1., G: 2, B: 3, A: 4, AlphaChannel: true},
+			color:   treePalette.NewOpaquePaletteColor(2, 181, 160, 12, "PERSIAN GREEN"),
 			alpha:   true,
 			palette: []treePalette.PaletteColor{},
 			output:  nil,
@@ -90,12 +87,10 @@ func TestTreePalette_ConvertColorRandomNoAlpha(t *testing.T) {
 // Helper functions
 
 func randomColor(alpha bool) treePalette.ColorRGBA {
-	return treePalette.ColorRGBA{
-		R:            uint32(rand.Intn(0xffff)),
-		G:            uint32(rand.Intn(0xffff)),
-		B:            uint32(rand.Intn(0xffff)),
-		A:            uint32(rand.Intn(0xffff)),
-		AlphaChannel: alpha,
+	if alpha {
+		return treePalette.NewTransparentColor(rand.Intn(255), rand.Intn(255), rand.Intn(255), rand.Float64())
+	} else {
+		return treePalette.NewOpaqueColor(rand.Intn(255), rand.Intn(255), rand.Intn(255))
 	}
 }
 

@@ -80,7 +80,7 @@ func (c ColorRGBA) Dimension(i int) uint32 {
 
 func (c ColorRGBA) String() string {
 	if c.AlphaChannel {
-		return fmt.Sprintf("{R:%f, G:%f, B:%d, A:%f}",
+		return fmt.Sprintf("{R:%f, G:%f, B:%f, A:%f}",
 			float64(c.R)/float64(0xffff)*255,
 			float64(c.G)/float64(0xffff)*255,
 			float64(c.B)/float64(0xffff)*255,
