@@ -15,7 +15,7 @@
  */
 
 // Package treePalette implements an indexed color palette based on kd-tree structure.
-package treePalette
+package treepalette
 
 import (
 	"fmt"

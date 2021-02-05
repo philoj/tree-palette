@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-package treePalette_test
+package treepalette_test
 
 import (
 	"fmt"
@@ -28,31 +28,31 @@ import (
 func TestTreePalette_ConvertColor(t *testing.T) {
 	tests := []struct {
 		name    string
-		color   treePalette.Color
+		color   treepalette.Color
 		alpha   bool
-		palette []treePalette.PaletteColor
-		output  treePalette.Color
+		palette []treepalette.PaletteColor
+		output  treepalette.Color
 	}{
 		{
 			name:  "nil",
 			color: nil,
 			alpha: true,
-			palette: []treePalette.PaletteColor{
-				treePalette.NewOpaquePaletteColor(199, 44, 58, 7, "BRICK RED"),
+			palette: []treepalette.PaletteColor{
+				treepalette.NewOpaquePaletteColor(199, 44, 58, 7, "BRICK RED"),
 			},
 			output: nil,
 		},
 		{
 			name:    "empty palette",
-			color:   treePalette.NewOpaquePaletteColor(2, 181, 160, 12, "PERSIAN GREEN"),
+			color:   treepalette.NewOpaquePaletteColor(2, 181, 160, 12, "PERSIAN GREEN"),
 			alpha:   true,
-			palette: []treePalette.PaletteColor{},
+			palette: []treepalette.PaletteColor{},
 			output:  nil,
 		},
 	}
 	for _, test := range tests {
 		t.Run(test.name, func(t *testing.T) {
-			p := treePalette.NewPalette(test.palette, test.alpha)
+			p := treepalette.NewPalette(test.palette, test.alpha)
 			assert.Equal(t, test.output, p.ConvertColor(test.color))
 		})
 	}
@@ -64,7 +64,7 @@ func TestTreePalette_ConvertColorRandomAlpha(t *testing.T) {
 		p := randomPalette(12, true)
 		r := closestIndex(c, p)
 		t.Run(fmt.Sprintf("random transparent palette: seed %d", i), func(t *testing.T) {
-			p := treePalette.NewPalette(p, true)
+			p := treepalette.NewPalette(p, true)
 			cc := p.ConvertColor(c)
 			assert.Equal(t, r, cc.Index())
 		})
@@ -77,7 +77,7 @@ func TestTreePalette_ConvertColorRandomNoAlpha(t *testing.T) {
 		p := randomPalette(12, false)
 		r := closestIndex(c, p)
 		t.Run(fmt.Sprintf("random opaque palette: seed %d", i), func(t *testing.T) {
-			p := treePalette.NewPalette(p, false)
+			p := treepalette.NewPalette(p, false)
 			cc := p.ConvertColor(c)
 			assert.Equal(t, r, cc.Index())
 		})
@@ -86,18 +86,18 @@ func TestTreePalette_ConvertColorRandomNoAlpha(t *testing.T) {
 
 // Helper functions
 
-func randomColor(alpha bool) treePalette.ColorRGBA {
+func randomColor(alpha bool) treepalette.ColorRGBA {
 	if alpha {
-		return treePalette.NewTransparentColor(rand.Intn(255), rand.Intn(255), rand.Intn(255), rand.Float64())
+		return treepalette.NewTransparentColor(rand.Intn(255), rand.Intn(255), rand.Intn(255), rand.Float64())
 	} else {
-		return treePalette.NewOpaqueColor(rand.Intn(255), rand.Intn(255), rand.Intn(255))
+		return treepalette.NewOpaqueColor(rand.Intn(255), rand.Intn(255), rand.Intn(255))
 	}
 }
 
-func randomPalette(n int, alpha bool) []treePalette.PaletteColor {
-	p := make([]treePalette.PaletteColor, n)
+func randomPalette(n int, alpha bool) []treepalette.PaletteColor {
+	p := make([]treepalette.PaletteColor, n)
 	for i := range p {
-		p[i] = &treePalette.IndexedColorRGBA{
+		p[i] = &treepalette.IndexedColorRGBA{
 			ColorRGBA: randomColor(alpha),
 			Id:        i,
 		}
@@ -105,7 +105,7 @@ func randomPalette(n int, alpha bool) []treePalette.PaletteColor {
 	return p
 }
 
-func closestIndex(c treePalette.Color, p []treePalette.PaletteColor) int {
+func closestIndex(c treepalette.Color, p []treepalette.PaletteColor) int {
 	var minD int64 = math.MaxInt64
 	var result int
 	for _, cc := range p {
