@@ -25,7 +25,6 @@ import (
 	"testing"
 )
 
-// TestKNN ...
 func TestTreePalette_ConvertColor(t *testing.T) {
 	tests := []struct {
 		name    string
