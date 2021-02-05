@@ -1,5 +1,8 @@
 # treePalette
 
+[![Build Status](https://travis-ci.com/philoj/tree-palette.svg?branch=main)](https://travis-ci.com/github/philoj/tree-palette)
+[![codecov](https://codecov.io/gh/philoj/tree-palette/branch/main/graph/badge.svg?token=TAIOSNJZ8C)](https://codecov.io/gh/philoj/tree-palette)
+[![Go Report Card](https://goreportcard.com/badge/github.com/philoj/tree-palette)](https://goreportcard.com/report/github.com/philoj/tree-palette)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/kyroy/kdtree/blob/master/LICENSE)
 
 An indexed color palette implementation in Go on top of a [k-d tree](https://en.wikipedia.org/wiki/K-d_tree) for fast color lookups. Also rank a palette against an image to identify prominent colors.
