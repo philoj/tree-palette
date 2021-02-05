@@ -80,26 +80,45 @@ func (c ColorRGBA) Dimension(i int) uint32 {
 
 func (c ColorRGBA) String() string {
 	if c.AlphaChannel {
-		return fmt.Sprintf("{R:%d, G:%d, B:%d, A:%d}", c.R, c.G, c.B, c.A)
+		return fmt.Sprintf("{R:%f, G:%f, B:%d, A:%f}",
+			float64(c.R)/float64(0xffff)*255,
+			float64(c.G)/float64(0xffff)*255,
+			float64(c.B)/float64(0xffff)*255,
+			float64(c.A)/float64(0xffff),
+		)
 	} else {
-		return fmt.Sprintf("{R:%d, G:%d, B:%d}", c.R, c.G, c.B)
+		return fmt.Sprintf("{R:%f, G:%f, B:%f}",
+			float64(c.R)/float64(0xffff)*255,
+			float64(c.G)/float64(0xffff)*255,
+			float64(c.B)/float64(0xffff)*255,
+		)
 	}
 }
 
-func NewTransparentColor(R, G, B, A uint32) ColorRGBA {
+// NewTransparentColor creates a transparent color. R,G,B values are in range [0-255], A in range [0-1]
+func NewTransparentColor(R, G, B int, A float64) ColorRGBA {
+	r, g, b, a := float64(R)/255*float64(0xffff),
+		float64(G)/255*float64(0xffff),
+		float64(B)/255*float64(0xffff),
+		A*float64(0xffff)
 	return ColorRGBA{
-		R:            R,
-		G:            G,
-		B:            B,
-		A:            A,
+		R:            uint32(r),
+		G:            uint32(g),
+		B:            uint32(b),
+		A:            uint32(a),
 		AlphaChannel: true,
 	}
 }
-func NewOpaqueColor(R, G, B uint32) ColorRGBA {
+
+// NewOpaqueColor creates a opaque color. R,G,B values are in range [0-255]
+func NewOpaqueColor(R, G, B int) ColorRGBA {
+	r, g, b := float64(R)/255*float64(0xffff),
+		float64(G)/255*float64(0xffff),
+		float64(B)/255*float64(0xffff)
 	return ColorRGBA{
-		R:            R,
-		G:            G,
-		B:            B,
+		R:            uint32(r),
+		G:            uint32(g),
+		B:            uint32(b),
 		AlphaChannel: false,
 	}
 }
@@ -107,7 +126,8 @@ func NewOpaqueColor(R, G, B uint32) ColorRGBA {
 // IndexedColorRGBA Example PaletteColor implementation.
 type IndexedColorRGBA struct {
 	ColorRGBA
-	Id int // Id is the color's unique index
+	Id   int    // Id is the color's unique index
+	Name string // A human readable name. Used in stringer
 }
 
 func (ic IndexedColorRGBA) Index() int {
@@ -115,18 +135,29 @@ func (ic IndexedColorRGBA) Index() int {
 }
 
 func (ic IndexedColorRGBA) String() string {
-	return fmt.Sprintf("{Id: %d, ColorRGBA: %s}", ic.Id, ic.ColorRGBA)
+	return fmt.Sprintf("%s(%d)", ic.Name, ic.Id)
 }
 
-func NewTransparentPaletteColor(R, G, B, A uint32, id int) IndexedColorRGBA {
+// NewTransparentColor creates a transparent palette color.
+// R,G,B values are in range [0-255], A in range [0-1].
+// id is the unique id for the color across the palette.
+// name is just any human readable identifier, no need to be unique.
+func NewTransparentPaletteColor(R, G, B int, A float64, id int, name string) IndexedColorRGBA {
 	return IndexedColorRGBA{
 		Id:        id,
+		Name:      name,
 		ColorRGBA: NewTransparentColor(R, G, B, A),
 	}
 }
-func ewOpaquePaletteColor(R, G, B uint32, id int) IndexedColorRGBA {
+
+// NewOpaquePaletteColor creates an opaque palette color.
+// R,G,B values are in range [0-255].
+// id is the unique id for the color across the palette.
+// name is just any human readable identifier, no need to be unique.
+func NewOpaquePaletteColor(R, G, B int, id int, name string) IndexedColorRGBA {
 	return IndexedColorRGBA{
 		Id:        id,
+		Name:      name,
 		ColorRGBA: NewOpaqueColor(R, G, B),
 	}
 }
