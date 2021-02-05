@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-// Package treePalette implements an indexed color palette based on kd-tree structure.
+// Package treepalette implements an indexed color palette based on kd-tree structure.
 package treepalette
 
 import (

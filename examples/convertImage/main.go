@@ -17,7 +17,7 @@ package main
 
 import (
 	"fmt"
-	treePalette "github.com/philoj/tree-palette"
+	"github.com/philoj/tree-palette"
 	"image"
 	"image/jpeg"
 	"log"
@@ -27,19 +27,19 @@ import (
 
 // Convert the given image into one using the given palette and serve both images so that one can preview the results.
 func main() {
-	paletteColors := []treePalette.PaletteColor{
-		treePalette.NewOpaquePaletteColor(255, 211, 92, 1, "DANDELION"),
-		treePalette.NewOpaquePaletteColor(255, 130, 1, 2, "DARK ORANGE"),
-		treePalette.NewOpaquePaletteColor(243, 114, 82, 3, "CRUSTA"),
-		treePalette.NewOpaquePaletteColor(199, 44, 58, 7, "BRICK RED"),
-		treePalette.NewOpaquePaletteColor(234, 62, 112, 8, "DARK PINK"),
-		treePalette.NewOpaquePaletteColor(149, 69, 103, 9, "CADILLAC"),
-		treePalette.NewOpaquePaletteColor(75, 196, 213, 10, "MEDIUM TURQUOISE"),
-		treePalette.NewOpaquePaletteColor(1, 128, 181, 11, "PACIFIC BLUE"),
-		treePalette.NewOpaquePaletteColor(2, 181, 160, 12, "PERSIAN GREEN"),
-		treePalette.NewOpaquePaletteColor(138, 151, 71, 13, "OLD OLIVE"),
+	paletteColors := []treepalette.PaletteColor{
+		treepalette.NewOpaquePaletteColor(255, 211, 92, 1, "DANDELION"),
+		treepalette.NewOpaquePaletteColor(255, 130, 1, 2, "DARK ORANGE"),
+		treepalette.NewOpaquePaletteColor(243, 114, 82, 3, "CRUSTA"),
+		treepalette.NewOpaquePaletteColor(199, 44, 58, 7, "BRICK RED"),
+		treepalette.NewOpaquePaletteColor(234, 62, 112, 8, "DARK PINK"),
+		treepalette.NewOpaquePaletteColor(149, 69, 103, 9, "CADILLAC"),
+		treepalette.NewOpaquePaletteColor(75, 196, 213, 10, "MEDIUM TURQUOISE"),
+		treepalette.NewOpaquePaletteColor(1, 128, 181, 11, "PACIFIC BLUE"),
+		treepalette.NewOpaquePaletteColor(2, 181, 160, 12, "PERSIAN GREEN"),
+		treepalette.NewOpaquePaletteColor(138, 151, 71, 13, "OLD OLIVE"),
 	}
-	palette := treePalette.NewPalette(paletteColors, false)
+	palette := treepalette.NewPalette(paletteColors, false)
 
 	// open and decode image
 	f, err := os.Open("image.jpg")
