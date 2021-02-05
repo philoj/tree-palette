@@ -1,4 +1,4 @@
-# treePalette
+# treepalette
 
 [![Build Status](https://travis-ci.com/philoj/tree-palette.svg?branch=main)](https://travis-ci.com/github/philoj/tree-palette)
 [![codecov](https://codecov.io/gh/philoj/tree-palette/branch/main/graph/badge.svg?token=TAIOSNJZ8C)](https://codecov.io/gh/philoj/tree-palette)
@@ -35,7 +35,7 @@ equivalentColor := m.Convert(someColor)
 
 ### Color ranking and image color analysis
 
-Start by implementing `treePalette.PaletteColor` and `treePalette.Color` interfaces:
+Start by implementing `treepalette.PaletteColor` and `treepalette.Color` interfaces:
 
 ```go
 // Color express A color as A n-dimensional point in the RGBA space for usage in the kd-tree search algorithm.
@@ -57,17 +57,17 @@ type PaletteColor interface {
 }
 ```
 
-Or use included implementations `treePalette.ColorRGBA` and `treePalette.IndexedColorRGBA` respectively:
+Or use included implementations `treepalette.ColorRGBA` and `treepalette.IndexedColorRGBA` respectively:
 ```go
 // Unknown color
-c := treePalette.NewOpaqueColor(121,201,10)
+c := treepalette.NewOpaqueColor(121,201,10)
 
 // Palette colors
-p1 := treePalette.NewOpaquePaletteColor(255, 130, 1, 2, "DARK ORANGE") // R,G,B, unique-id, name
-p2 := treePalette.NewOpaquePaletteColor(1, 128, 181, 11, "PACIFIC BLUE")
+p1 := treepalette.NewOpaquePaletteColor(255, 130, 1, 2, "DARK ORANGE") // R,G,B, unique-id, name
+p2 := treepalette.NewOpaquePaletteColor(1, 128, 181, 11, "PACIFIC BLUE")
 
 // Create palette
-palette := treePalette.NewPalette([]treePalette.PaletteColor{p1,p2}, false)
+palette := treepalette.NewPalette([]treepalette.PaletteColor{p1,p2}, false)
 
 // Equivalent color
 equivalent := palette.Convert(c)
