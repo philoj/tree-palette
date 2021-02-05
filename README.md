@@ -1,5 +1,6 @@
 # treepalette
 
+[![GoDoc](https://godoc.org/github.com/philoj/tree-palette?status.svg)](https://godoc.org/github.com/philoj/tree-palette)
 [![Build Status](https://travis-ci.com/philoj/tree-palette.svg?branch=main)](https://travis-ci.com/github/philoj/tree-palette)
 [![codecov](https://codecov.io/gh/philoj/tree-palette/branch/main/graph/badge.svg?token=TAIOSNJZ8C)](https://codecov.io/gh/philoj/tree-palette)
 [![Go Report Card](https://goreportcard.com/badge/github.com/philoj/tree-palette)](https://goreportcard.com/report/github.com/philoj/tree-palette)
